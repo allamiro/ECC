@@ -1,9 +1,16 @@
 Embedding Data on a Curve
 
-These routines assume Chapter 2 helpers: `msqr` (Legendre), `msqrt`, `madd`,
-`mmul`, and `mneg`.
+These routines assume Chapter 2 helpers.
+
+- Python: `legendre`, `sqrt_mod`, `mod_add`, `mod_mul`, `mod_neg`
+- MATLAB: `msqr`, `msqrt`, `madd`, `mmul`, `mneg`
 
 Listing 3.8: Computing $f(x)$
+
+This computes the right-hand side of the curve equation:
+$$
+f(x) = x^3 + a_4x + a_6
+$$
 
 Python
 ```python
@@ -25,6 +32,9 @@ end
 ```
 
 Listing 3.9: Embedding Data (Find Points)
+
+This increments $x$ until $f(x)$ is a quadratic residue, then returns the two points
+with $y = \pm \sqrt{f(x)}$.
 
 Python
 ```python
@@ -71,6 +81,32 @@ function [P1, P2] = elptic_embed(P1, P2, x, E)
 end
 ```
 
+How to run (example)
+
+Python
+```python
+p = 43
+E = Curve(a4=23, a6=-1)
+P1 = Point()
+P2 = Point()
+elptic_embed(P1, P2, 27, E, p)
+print("P1 =", P1.x, P1.y)
+print("P2 =", P2.x, P2.y)
+```
+
+MATLAB
+```matlab
+minit(43);
+E = curve_make(23, -1);
+P1 = point_init();
+P2 = point_init();
+[P1, P2] = elptic_embed(P1, P2, 27, E);
+point_printf('P1 = ', P1);
+point_printf('P2 = ', P2);
+```
+
+Expected result
+- Two points with the same x value and opposite y values.
 Grouped view (optional)
 
 Listing 3.8 computes the curve RHS and Listing 3.9 searches for a valid point.

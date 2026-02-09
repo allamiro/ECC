@@ -5,6 +5,8 @@ These routines assume modular arithmetic helpers from Chapter 2:
 
 Listing 3.4: Point Addition - Test for Infinity
 
+If either input point is the point at infinity, return the other point.
+
 Python
 ```python
 def elptic_sum(R, P, Q, E, p):
@@ -34,6 +36,10 @@ end
 
 Listing 3.5: Point Addition - Computing $\lambda$
 
+This computes the slope using the unified formula. If $y_1 + y_2 = 0$, the slope must
+be computed using the alternate form, and if both $x_1 = x_2$ and $y_1 = -y_2$, the
+result is the point at infinity.
+
 Python
 ```python
 def elptic_lambda(P, Q, E, p):
@@ -55,7 +61,7 @@ def elptic_lambda(P, Q, E, p):
 
 MATLAB
 ```matlab
-function lmbda = elliptic_lambda(P, Q, E)
+function lmbda = elptic_lambda(P, Q, E)
     p = mget();
     t1 = mmul(P.x, P.x);
     t2 = mmul(P.x, Q.x);
@@ -79,6 +85,8 @@ end
 
 Listing 3.6: Point Addition - $x_3$ and $y_3$
 
+This finishes the addition by computing the new coordinates using the slope.
+
 Python
 ```python
 def elptic_sum_finish(R, P, Q, E, p):
@@ -96,7 +104,7 @@ MATLAB
 ```matlab
 function R = elptic_sum_finish(R, P, Q, E)
     p = mget();
-    lmbda = elliptic_lambda(P, Q, E);
+    lmbda = elptic_lambda(P, Q, E);
     if isempty(lmbda)
         R.x = 0;
         R.y = 0;
@@ -109,6 +117,34 @@ function R = elptic_sum_finish(R, P, Q, E)
     R.y = y3;
 end
 ```
+
+How to run (example)
+
+Python
+```python
+# Example curve: y^2 = x^3 + 23x - 1 mod 43
+p = 43
+E = Curve(a4=23, a6=-1)
+P = Point(3, 10)
+Q = Point(9, 7)
+R = Point()
+elptic_sum_finish(R, P, Q, E, p)
+print("R =", R.x, R.y)
+```
+
+MATLAB
+```matlab
+minit(43);
+E = curve_make(23, -1);
+P = point_make(3, 10);
+Q = point_make(9, 7);
+R = point_init();
+R = elptic_sum_finish(R, P, Q, E);
+point_printf('R = ', R);
+```
+
+Expected result
+- A single point printed as `R = (x, y)` that lies on the curve.
 
 Grouped view (optional)
 

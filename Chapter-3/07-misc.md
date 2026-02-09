@@ -2,6 +2,9 @@ Miscellaneous Routines
 
 Listing 3.10: Random Point
 
+This picks a random x value and embeds it on the curve. The low bit selects which
+of the two y values is returned.
+
 Python
 ```python
 def point_rand(P, E, p):
@@ -27,6 +30,8 @@ end
 ```
 
 Listing 3.11: Print a Point
+
+Simple console output for debugging and verification.
 
 Python
 ```python
@@ -59,6 +64,29 @@ MATLAB
 % elptic_sum, elptic_embed, point_printf
 % elptic_mul, point_rand
 ```
+
+How to run (example)
+
+Python
+```python
+p = 43
+E = Curve(a4=23, a6=-1)
+P = point_init()
+point_rand(P, E, p)
+point_printf("Rand = ", P)
+```
+
+MATLAB
+```matlab
+minit(43);
+E = curve_make(23, -1);
+P = point_init();
+P = point_rand(P, E);
+point_printf('Rand = ', P);
+```
+
+Expected result
+- A random valid curve point printed as `Rand = (x, y)`.
 
 Grouped view (optional)
 

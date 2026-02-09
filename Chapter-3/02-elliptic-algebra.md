@@ -38,6 +38,9 @@ $$
 
 Plot: Elliptic Curve Over the Reals
 
+Dependencies
+- Python: `numpy`, `matplotlib`
+
 Python
 ```python
 import numpy as np
@@ -78,3 +81,10 @@ function plot_real_curve()
     grid on;
 end
 ```
+
+How to run
+- Python: save as `plot_real_curve.py` and run `python plot_real_curve.py`
+- MATLAB: save as `plot_real_curve.m` and run `plot_real_curve`
+
+Expected result
+- A smooth elliptic curve over the reals with two symmetric branches.

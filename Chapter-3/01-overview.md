@@ -13,3 +13,8 @@ Key ideas:
 - Point addition uses a slope and reflection rule
 - Point multiplication uses double-and-add
 - Embedding data searches for x values with quadratic residues
+
+How to use this chapter
+- Each section contains a short explanation followed by Python and MATLAB listings.
+- Plotting examples are included where relevant so you can see the curve or points.
+- To run code, copy a listing into a `.py` or `.m` file and execute it (see each page).

@@ -32,6 +32,20 @@ function E = curve_make(a4, a6)
 end
 ```
 
+Example usage
+
+Python
+```python
+P = Point(3, 10)
+E = Curve(a4=23, a6=-1)
+```
+
+MATLAB
+```matlab
+P = point_make(3, 10);
+E = curve_make(23, -1);
+```
+
 Listing 3.2: Point and Curve Initialization
 
 These helpers mirror the C init/clear routines. In Python and MATLAB this is mostly
@@ -106,6 +120,9 @@ end
 
 Plot: Finite Field Points (Example p = 43)
 
+Dependencies
+- Python: `matplotlib`
+
 Python
 ```python
 import matplotlib.pyplot as plt
@@ -159,6 +176,13 @@ function plot_field_points()
     grid on;
 end
 ```
+
+How to run the plot
+- Python: save as `plot_field_points.py` and run `python plot_field_points.py`
+- MATLAB: save as `plot_field_points.m` and run `plot_field_points`
+
+Expected result
+- A scatter plot of all finite-field points on the example curve.
 
 Grouped view (optional)
 

@@ -19,7 +19,7 @@ Core operations:
 The stored-modulus approach mirrors the book's modulo.c style: initialize the modulus
 once and then use lighter m* functions throughout the code.
 
-Listing 2.1-2.3: Modular API and Initialization
+Listing 2.1: Modular API (with modulus input)
 
 Python
 ```python
@@ -53,6 +53,57 @@ def mod_neg(b, n):
     return (-b) % n
 
 
+def mod_rand(n):
+    return secrets.randbelow(n)
+```
+
+MATLAB
+```matlab
+function c = mod_add(b, c, n)
+    c = mod(b + c, n);
+end
+
+function c = mod_sub(b, c, n)
+    c = mod(b - c, n);
+end
+
+function c = mod_mul(b, c, n)
+    c = mod(b * c, n);
+end
+
+function c = mod_div(b, c, n)
+    c = mod(b * modinv(c, n), n);
+end
+
+function c = mod_neg(b, n)
+    c = mod(-b, n);
+end
+```
+
+Listing 2.2: Modular Division (Error on Zero)
+
+Python
+```python
+def mod_div_checked(b, c, n):
+    if c % n == 0:
+        raise ZeroDivisionError("division by zero in mod_div")
+    return (b * mod_inv(c, n)) % n
+```
+
+MATLAB
+```matlab
+function c = mod_div_checked(b, c, n)
+    if mod(c, n) == 0
+        error('division by zero in mod_div');
+    end
+    c = mod(b * modinv(c, n), n);
+end
+```
+
+Listing 2.3: Initialization and Stored-Modulus API
+
+Python
+```python
 class ModCtx:
     def __init__(self, p):
         if p <= 2 or p % 2 == 0:
@@ -90,26 +141,6 @@ function p = mget()
     p = modulus;
 end
 
-function c = mod_add(b, c, n)
-    c = mod(b + c, n);
-end
-
-function c = mod_sub(b, c, n)
-    c = mod(b - c, n);
-end
-
-function c = mod_mul(b, c, n)
-    c = mod(b * c, n);
-end
-
-function c = mod_div(b, c, n)
-    c = mod(b * modinv(c, n), n);
-end
-
-function c = mod_neg(b, n)
-    c = mod(-b, n);
-end
-
 function c = madd(a, b)
     p = mget();
     c = mod(a + b, p);
@@ -136,25 +167,9 @@ function c = mneg(a)
 end
 ```
 
-Listing 2.2: Modular Division (Error on Zero)
+Grouped view (optional)
 
-Python
-```python
-def mod_div_checked(b, c, n):
-    if c % n == 0:
-        raise ZeroDivisionError("division by zero in mod_div")
-    return (b * mod_inv(c, n)) % n
-```
-
-MATLAB
-```matlab
-function c = mod_div_checked(b, c, n)
-    if mod(c, n) == 0
-        error('division by zero in mod_div');
-    end
-    c = mod(b * modinv(c, n), n);
-end
-```
+The full modular API is the combination of Listings 2.1, 2.2, and 2.3 above.
 
 Helper Routines (MATLAB)
 ```matlab

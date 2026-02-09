@@ -28,19 +28,62 @@ This follows from Fermat's little theorem and is very fast.
 
 This algorithm is reliable and works for any odd prime modulus.
 
-Listing 2.5-2.7: Square Root mod p (Tonelli-Shanks)
+Listing 2.5: Square Root mod p (Entry and Residue Check)
 
 Python
 ```python
-def sqrt_mod(a, p):
+def sqrt_mod_entry(a, p):
     a = a % p
     if a == 0:
         return 0
     if legendre(a, p) != 1:
         return None
+    return "use p3 mod4 or Tonelli-Shanks"
+```
 
-    if p % 4 == 3:
-        return pow(a, (p + 1) // 4, p)
+MATLAB
+```matlab
+function x = msqrt_entry(a)
+    p = mget();
+    a = mod(a, p);
+    if a == 0
+        x = 0;
+        return;
+    end
+    if msqr(a) ~= 1
+        x = [];
+        return;
+    end
+    x = 'use p3 mod4 or Tonelli-Shanks';
+end
+```
+
+Listing 2.6: Square Root mod p for $p \equiv 3 \pmod{4}$
+
+Python
+```python
+def sqrt_mod_p3(a, p):
+    return pow(a, (p + 1) // 4, p)
+```
+
+MATLAB
+```matlab
+function x = msqrt_p3(a)
+    p = mget();
+    x = modpow(a, (p + 1) / 4, p);
+end
+```
+
+Listing 2.7: Square Root mod p (Tonelli-Shanks)
+
+Python
+```python
+def sqrt_mod_tonelli(a, p):
+    a = a % p
+    if a == 0:
+        return 0
+    if legendre(a, p) != 1:
+        return None
 
     q = p - 1
     e = 0
@@ -78,7 +121,7 @@ def sqrt_mod(a, p):
 
 MATLAB
 ```matlab
-function x = msqrt(a)
+function x = msqrt_tonelli(a)
     p = mget();
     a = mod(a, p);
     if a == 0
@@ -158,6 +201,44 @@ function y = mpowi(a, i)
     else
         y = modpow(a, i, p);
     end
+end
+```
+
+Grouped view (optional): Full Square Root Function
+
+Python
+```python
+def sqrt_mod(a, p):
+    a = a % p
+    if a == 0:
+        return 0
+    if legendre(a, p) != 1:
+        return None
+
+    if p % 4 == 3:
+        return sqrt_mod_p3(a, p)
+
+    return sqrt_mod_tonelli(a, p)
+```
+
+MATLAB
+```matlab
+function x = msqrt(a)
+    p = mget();
+    a = mod(a, p);
+    if a == 0
+        x = 0;
+        return;
+    end
+    if msqr(a) ~= 1
+        x = [];
+        return;
+    end
+    if mod(p, 4) == 3
+        x = msqrt_p3(a);
+        return;
+    end
+    x = msqrt_tonelli(a);
 end
 ```
 

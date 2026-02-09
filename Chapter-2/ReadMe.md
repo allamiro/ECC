@@ -3,7 +3,6 @@ Chapter 2 - Finite Field Mathematics
 Contents
 - `01-overview.md` - Chapter context and learning goals
 - `02-finite-fields.md` - Summary of finite field basics and elliptic curve groups
-- `03-modular-subroutines.md` - Modular arithmetic subroutines (concepts)
-- `04-quadratic-residues.md` - Quadratic residues and Legendre symbol
-- `05-square-roots.md` - Square roots mod p (p mod 4 and Tonelli-Shanks)
-- `06-code.md` - Python and MATLAB conversions for Listings 2.1-2.8
+- `03-modular-subroutines.md` - Listings 2.1-2.3 with Python/MATLAB
+- `04-quadratic-residues.md` - Listing 2.4 with Python/MATLAB
+- `05-square-roots.md` - Listings 2.5-2.8 with Python/MATLAB

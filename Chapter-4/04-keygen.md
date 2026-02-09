@@ -10,6 +10,10 @@ Dependencies
 
 Listing 4.2: Base system structure
 
+What it does
+- Packages curve parameters, base point, order, and cofactor in one place.
+- Makes it easy to pass all public parameters to key generation and exchange routines.
+
 Python
 ```python
 class BaseSystem:
@@ -31,6 +35,10 @@ end
 ```
 
 Listing 4.3: Key generation
+
+What it does
+- Hashes a pass phrase into a private key modulo the base point order.
+- Multiplies the base point by the private key to produce the public key.
 
 Python
 ```python

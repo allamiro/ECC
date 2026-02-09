@@ -2,6 +2,10 @@ Test Code (Diffie-Hellman and MQV)
 
 Listing 4.12: Skip line helper
 
+What it does
+- Provides a minimal helper for moving through line-based input.
+- In Python/MATLAB we parse by lines directly, so this stays simple.
+
 Python
 ```python
 def skip_lines(lines, start, count):
@@ -16,6 +20,10 @@ end
 ```
 
 Listing 4.13: Read curve parameters (Python style)
+
+What it does
+- Parses the curve parameter files into field prime, order, cofactor, curve, and base point.
+- Builds `Curve` and `Point` objects for later tests.
 
 Python
 ```python
@@ -113,6 +121,10 @@ end
 
 Listing 4.14: Key generation test
 
+What it does
+- Reads one curve parameter file.
+- Generates a public/private key pair from a pass phrase.
+
 Python
 ```python
 prime, order, cofactor, E, G = read_curve_params("Curve_256_params.dat")
@@ -132,6 +144,9 @@ point_printf('PK = ', PK);
 ```
 
 Listing 4.15: Diffie-Hellman test
+
+What it does
+- Generates two key pairs and confirms both sides compute the same shared secret.
 
 Python
 ```python
@@ -153,6 +168,9 @@ disp(my_share == their_share);
 
 Listing 4.16: MQV ephemeral keys
 
+What it does
+- Creates one ephemeral key pair for each side of the MQV exchange.
+
 Python
 ```python
 eA, EpA = mqv_ephem(base)
@@ -166,6 +184,9 @@ MATLAB
 ```
 
 Listing 4.17: MQV full shared secret
+
+What it does
+- Runs MQV on both sides and checks that the resulting keyshares match.
 
 Python
 ```python

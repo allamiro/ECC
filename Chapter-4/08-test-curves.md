@@ -4,6 +4,9 @@ These files contain parameters for the field prime, curve coefficients, base poi
 order, and cofactor. They are used by the test harness in the next section.
 
 Listing 4.8: 160-bit curve
+
+What it is
+- Example 160-bit field curve and base point parameters for testing.
 ```
 File: Curve_160_params.dat
 prime
@@ -21,6 +24,9 @@ a08957b09764ae59da8fb3058efef9c428e497268
 ```
 
 Listing 4.9: 256-bit curve
+
+What it is
+- Example 256-bit field curve and base point parameters for testing.
 ```
 File: Curve_256_params.dat
 prime
@@ -38,6 +44,9 @@ basepoint(x y)
 ```
 
 Listing 4.10: 384-bit curve
+
+What it is
+- Example 384-bit field curve and base point parameters for testing.
 ```
 File: Curve_384_params.dat
 prime
@@ -59,6 +68,9 @@ basepoint(x y)
 ```
 
 Listing 4.11: 512-bit curve
+
+What it is
+- Example 512-bit field curve and base point parameters for testing.
 ```
 File: Curve_512_params.dat
 prime

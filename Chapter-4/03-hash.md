@@ -6,6 +6,11 @@ as a drop-in XOF. You can replace it with a K12 binding if desired.
 
 Listing 4.1: Hash to finite field
 
+What it does
+- Expands the input with an XOF to a length that avoids modulo bias.
+- Converts the output bytes to an integer and reduces it modulo the field prime.
+- Uses a domain separation tag so the same input can be used safely in different contexts.
+
 Python
 ```python
 import hashlib

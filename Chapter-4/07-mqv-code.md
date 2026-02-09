@@ -5,6 +5,10 @@ Dependencies
 
 Listing 4.5: Ephemeral key generator
 
+What it does
+- Picks a random ephemeral private key.
+- Computes the corresponding ephemeral public key.
+
 Python
 ```python
 import secrets
@@ -27,6 +31,10 @@ end
 ```
 
 Listing 4.6: Associate value function
+
+What it does
+- Takes the lower half of an x-coordinate and forces a high bit.
+- Produces a value that binds the ephemeral key into the shared secret computation.
 
 Python
 ```python
@@ -53,6 +61,11 @@ end
 ```
 
 Listing 4.7: Full ECC MQV shared secret
+
+What it does
+- Combines static and ephemeral private keys into a scalar `s`.
+- Combines the other side's static and ephemeral public keys into a point `U`.
+- Multiplies `U` by `s` (and cofactor if needed) and returns the x-coordinate.
 
 Python
 ```python

@@ -8,6 +8,10 @@ Dependencies
 
 Listing 4.4: Diffie-Hellman shared key
 
+What it does
+- Multiplies the other party's public key by your private key.
+- Returns the x-coordinate as the shared secret input for symmetric crypto.
+
 Python
 ```python
 def diffie_hellman_shared(my_sk, their_pk, curve, p):
